@@ -1,0 +1,62 @@
+<!doctype html>
+<html class="no-js" lang="">
+<head>
+    <meta charset="utf-8">
+    <title>Rechentrainer</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+    <link rel="stylesheet" href="css/main.css">
+    <script src="src/main.js"></script>
+</head>
+<body>
+
+<div class="block">
+    <div id="challengeContainer">
+    </div>
+    <input type="button" id="ok_btn" value="OK">
+</div>
+
+<div id="points">
+
+
+</div>
+
+<script>
+    var trainer = new RechenTrainer(document.getElementById('challengeContainer'));
+    var audio = new Audio();
+    var points = 0;
+
+    document.getElementById('ok_btn').addEventListener('click', evaluate);
+    document.addEventListener('keydown', function (event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            evaluate();
+        }
+    });
+
+
+    function evaluate() {
+        var passed = trainer.check();
+        points += trainer.getPoints();
+        if( points < 0 ){
+            points = 0;
+        }
+
+        document.getElementById('points').innerText = points + ' Punkte'
+
+        if (passed) {
+            audio.src = 'audio/correct.mp3';
+            setTimeout(trainer.nextChallenge.bind(trainer), 1500);
+        } else {
+            audio.src = 'audio/wrong.mp3';
+            setTimeout(trainer.reset.bind(trainer), 1500);
+        }
+        audio.play();
+    }
+
+
+</script>
+</body>
+</html>
