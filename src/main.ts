@@ -17,7 +17,6 @@ class RechenTrainer {
     }
 
     nextChallenge(): void {
-        var self = this;
         this._currentTry = 1;
         this._passed = false;
         this._currentChallenge = new Challenge(100);
@@ -66,11 +65,13 @@ class RechenTrainer {
 
     reset(): void {
         document.getElementById('questionPart').removeAttribute('class');
+        document.getElementById('questionPart').setAttribute('contenteditable', 'true');
         document.getElementById('questionPart').innerText = '?';
         document.getElementById('questionPart').focus();
     }
 
     private evaluate(): boolean {
+        document.getElementById('questionPart').setAttribute('contenteditable', 'false');
         this._passed = parseInt(document.getElementById('questionPart').innerText) === this._currentChallenge.questionValue;
         this._currentTry += 1;
         return this._passed;

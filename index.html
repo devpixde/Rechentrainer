@@ -28,19 +28,16 @@
     var audio = new Audio();
     var points = 0;
 
-    document.getElementById('ok_btn').addEventListener('click', evaluate);
-    document.addEventListener('keydown', function (event) {
-        if (event.which === 13) {
-            event.preventDefault();
-            evaluate();
-        }
-    });
+    nextChallange();
 
 
     function evaluate() {
+
+        removeListener();
+
         var passed = trainer.check();
         points += trainer.getPoints();
-        if( points < 0 ){
+        if (points < 0) {
             points = 0;
         }
 
@@ -48,12 +45,42 @@
 
         if (passed) {
             audio.src = 'audio/correct.mp3';
-            setTimeout(trainer.nextChallenge.bind(trainer), 1500);
+            setTimeout(nextChallange, 1500);
         } else {
             audio.src = 'audio/wrong.mp3';
-            setTimeout(trainer.reset.bind(trainer), 1500);
+            setTimeout(nextTry, 1500);
         }
         audio.play();
+    }
+
+    function nextTry() {
+        trainer.reset();
+        setListener();
+    }
+
+
+    function nextChallange() {
+        trainer.nextChallenge();
+        setListener();
+    }
+
+    function setListener() {
+        document.getElementById('ok_btn').addEventListener('click', evaluate);
+        document.addEventListener('keydown', onEnterKey);
+        document.getElementById('ok_btn').style.visibility = 'visible';
+    }
+
+    function removeListener() {
+        document.getElementById('ok_btn').removeEventListener('click', evaluate);
+        document.removeEventListener('keydown', onEnterKey);
+        document.getElementById('ok_btn').style.visibility = 'hidden';
+    }
+
+    function onEnterKey(event) {
+        if (event.which === 13) {
+            event.preventDefault();
+            evaluate();
+        }
     }
 
 
