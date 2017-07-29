@@ -167,6 +167,9 @@ var Challenge = (function () {
         if (this._arg2 === 0) {
             this._arg2 = 1;
         }
+        if (this._result === 0) {
+            this._result = 1;
+        }
         this._arg1 = this._result * this._arg2;
         if (this._arg1 > this._maxNum) {
             this.createDiv();
