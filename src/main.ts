@@ -9,6 +9,7 @@ class RechenTrainer {
     private _currentChallenge: Challenge;
     private _currentTry = 1;
     private _passed: boolean = false;
+    private _maxNum : number = 100;
 
 
     constructor(container: HTMLDivElement) {
@@ -19,7 +20,7 @@ class RechenTrainer {
     nextChallenge(): void {
         this._currentTry = 1;
         this._passed = false;
-        this._currentChallenge = new Challenge(100);
+        this._currentChallenge = new Challenge(this._maxNum);
         this._challengeContainer.innerHTML = this.getWrapped('arg1') + this._currentChallenge.operator + this.getWrapped('arg2') + ' = ' + this.getWrapped('result');
         document.getElementById('questionPart').focus();
         document.getElementById('questionPart').addEventListener('keydown', function (event) {
@@ -70,6 +71,11 @@ class RechenTrainer {
         document.getElementById('questionPart').focus();
     }
 
+    setMaxNum(maxNum:number){
+        this._maxNum = maxNum;
+    }
+
+
     private evaluate(): boolean {
         document.getElementById('questionPart').setAttribute('contenteditable', 'false');
         this._passed = parseInt(document.getElementById('questionPart').innerText) === this._currentChallenge.questionValue;
@@ -97,6 +103,7 @@ class Challenge {
     private _parts: Array<string> = ['arg1', 'arg2', 'result'];
 
     constructor(maxNum: number) {
+        this._maxNum = maxNum;
         this.create();
         this._hiddenPart = this._parts[Math.floor(Math.random() * 3)];
     }

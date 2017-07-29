@@ -274,6 +274,17 @@ textarea {
     padding: 30px;
 }
 
+#maxNumSelector{
+    margin:auto;
+    width: 450px;
+    height: 5px;
+    background-color: #3c46a0;
+    border-top:1px solid lightslategrey;
+    padding: 30px;
+    padding-top: 10px;
+    color:#b3d4fc;
+}
+
 #challengeContainer {
     width: 300px;
     border: 1px dimgrey dashed;

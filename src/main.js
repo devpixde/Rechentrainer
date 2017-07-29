@@ -5,13 +5,14 @@ var RechenTrainer = (function () {
     function RechenTrainer(container) {
         this._currentTry = 1;
         this._passed = false;
+        this._maxNum = 100;
         this._challengeContainer = container;
         this.nextChallenge();
     }
     RechenTrainer.prototype.nextChallenge = function () {
         this._currentTry = 1;
         this._passed = false;
-        this._currentChallenge = new Challenge(100);
+        this._currentChallenge = new Challenge(this._maxNum);
         this._challengeContainer.innerHTML = this.getWrapped('arg1') + this._currentChallenge.operator + this.getWrapped('arg2') + ' = ' + this.getWrapped('result');
         document.getElementById('questionPart').focus();
         document.getElementById('questionPart').addEventListener('keydown', function (event) {
@@ -53,6 +54,9 @@ var RechenTrainer = (function () {
         document.getElementById('questionPart').innerText = '?';
         document.getElementById('questionPart').focus();
     };
+    RechenTrainer.prototype.setMaxNum = function (maxNum) {
+        this._maxNum = maxNum;
+    };
     RechenTrainer.prototype.evaluate = function () {
         document.getElementById('questionPart').setAttribute('contenteditable', 'false');
         this._passed = parseInt(document.getElementById('questionPart').innerText) === this._currentChallenge.questionValue;
@@ -78,6 +82,7 @@ var Challenge = (function () {
         this._operator = '+';
         this._hiddenPart = 'arg1';
         this._parts = ['arg1', 'arg2', 'result'];
+        this._maxNum = maxNum;
         this.create();
         this._hiddenPart = this._parts[Math.floor(Math.random() * 3)];
     }

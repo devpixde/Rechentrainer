@@ -18,6 +18,15 @@
     <input type="button" id="ok_btn" value="OK">
 </div>
 
+<div id="maxNumSelector">
+    <fieldset>
+        <input onclick="setMaxNum()" type="radio" name="maxNum" value="100" checked="checked"> bis 100
+        <input onclick="setMaxNum()" type="radio" name="maxNum" value="200" > bis 200
+        <input onclick="setMaxNum()" type="radio" name="maxNum" value="500" > bis 500
+        <input onclick="setMaxNum()" type="radio" name="maxNum" value="1000"> bis 1000
+    </fieldset>
+</div>
+
 <div id="points">
 
 
@@ -28,7 +37,12 @@
     var audio = new Audio();
     var points = 0;
 
+
     nextChallange();
+
+    function setMaxNum() {
+        trainer.setMaxNum(Number(document.querySelector('input[name = "maxNum"]:checked').value));
+    }
 
 
     function evaluate() {
