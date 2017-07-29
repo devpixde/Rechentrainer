@@ -268,7 +268,7 @@ textarea {
 .block{
     margin-top: 10%;
     margin:auto;
-    width: 400px;
+    width: 450px;
     height: 70px;
     background-color: #3c46a0;
     padding: 30px;
@@ -281,12 +281,21 @@ textarea {
     position: relative;
     background-color: aliceblue;
     float: left;
+    font-size: 30px;
 }
 
 #ok_btn{
     clear: left;
     margin-left: 30px;
-    margin-top: 10px;
+    margin-top: 2px;
+
+    background-color: #4CAF50; /* Green */
+    border: none;
+    color: white;
+    padding: 15px 30px;
+    text-align: center;
+    text-decoration: none;
+    font-size: 24px;
 }
 
 #questionPart{
@@ -302,6 +311,7 @@ textarea {
 
 .wrong{
     background-color: crimson !important;
+    color: white;
 }
 
 .correct{
