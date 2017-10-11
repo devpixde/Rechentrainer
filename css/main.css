@@ -270,14 +270,14 @@ textarea {
     margin:auto;
     width: 450px;
     height: 70px;
-    background-color: #3c46a0;
+    background-color: #f3f64b;
     padding: 30px;
 }
 
 #maxNumSelector{
     margin:auto;
     width: 450px;
-    height: 5px;
+    height: 100px;
     background-color: #3c46a0;
     border-top:1px solid lightslategrey;
     padding: 30px;

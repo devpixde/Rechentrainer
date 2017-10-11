@@ -25,23 +25,28 @@
         <input onclick="setMaxNum()" type="radio" name="maxNum" value="500" > bis 500
         <input onclick="setMaxNum()" type="radio" name="maxNum" value="1000"> bis 1000
     </fieldset>
+    <div>
+        <hr>
+        Bis 100: 5 Punkte. Bis 200: 7 Punkte. Bis 500: 10 Punkte. Bis 1000: 20 Punkte
+    </div>
 </div>
 
 <div id="points">
-
-
 </div>
 
 <script>
     var trainer = new RechenTrainer(document.getElementById('challengeContainer'));
     var audio = new Audio();
-    var points = 0;
+    var pointsFromStorage = window.localStorage.getItem('points');
+    var points = pointsFromStorage ? Number(pointsFromStorage) : 0;
 
+    document.getElementById('points').innerText = 'Hallo David, du hast ' + points + ' Punkte!';
 
     nextChallange();
 
     function setMaxNum() {
         trainer.setMaxNum(Number(document.querySelector('input[name = "maxNum"]:checked').value));
+        nextChallange();
     }
 
 
@@ -55,7 +60,8 @@
             points = 0;
         }
 
-        document.getElementById('points').innerText = points + ' Punkte'
+        window.localStorage.setItem('points', points);
+        document.getElementById('points').innerText = points + ' Punkte';
 
         if (passed) {
             audio.src = 'audio/correct.mp3';

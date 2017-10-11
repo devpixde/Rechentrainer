@@ -9,7 +9,7 @@ class RechenTrainer {
     private _currentChallenge: Challenge;
     private _currentTry = 1;
     private _passed: boolean = false;
-    private _maxNum : number = 100;
+    private _maxNum: number = 100;
 
 
     constructor(container: HTMLDivElement) {
@@ -56,9 +56,16 @@ class RechenTrainer {
     }
 
     getPoints(): Number {
-        if(this._passed){
+        if (this._passed) {
+
+            switch (this._maxNum) {
+                case 100 : return 5;
+                case 200 : return 7;
+                case 500 : return 10;
+                case 1000 : return 20;
+            }
             return 5;
-        } else{
+        } else {
             return this._currentTry * (-1);
         }
 
@@ -71,7 +78,7 @@ class RechenTrainer {
         document.getElementById('questionPart').focus();
     }
 
-    setMaxNum(maxNum:number){
+    setMaxNum(maxNum: number) {
         this._maxNum = maxNum;
     }
 
@@ -91,6 +98,7 @@ class RechenTrainer {
         }
     }
 }
+
 
 class Challenge {
 
@@ -166,10 +174,10 @@ class Challenge {
         this._arg1 = this.getRandInt(this._maxNum);
         this._arg2 = this.getRandInt(this._maxNum);
 
-        if( this._arg2 === 0 && this._hiddenPart === 'arg2'){
+        if (this._arg2 === 0 && ( this._hiddenPart === 'arg2' || this._hiddenPart === 'arg1')) {
             this._arg2 = 1;
         }
-        if( this._arg1 === 0 && this._hiddenPart === 'arg1'){
+        if (this._arg1 === 0 && ( this._hiddenPart === 'arg1' || this._hiddenPart === 'arg2')) {
             this._arg1 = 1;
         }
 

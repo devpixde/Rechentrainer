@@ -42,6 +42,12 @@ var RechenTrainer = (function () {
     };
     RechenTrainer.prototype.getPoints = function () {
         if (this._passed) {
+            switch (this._maxNum) {
+                case 100: return 5;
+                case 200: return 7;
+                case 500: return 10;
+                case 1000: return 20;
+            }
             return 5;
         }
         else {
@@ -156,10 +162,10 @@ var Challenge = (function () {
     Challenge.prototype.createMulti = function () {
         this._arg1 = this.getRandInt(this._maxNum);
         this._arg2 = this.getRandInt(this._maxNum);
-        if (this._arg2 === 0 && this._hiddenPart === 'arg2') {
+        if (this._arg2 === 0 && (this._hiddenPart === 'arg2' || this._hiddenPart === 'arg1')) {
             this._arg2 = 1;
         }
-        if (this._arg1 === 0 && this._hiddenPart === 'arg1') {
+        if (this._arg1 === 0 && (this._hiddenPart === 'arg1' || this._hiddenPart === 'arg2')) {
             this._arg1 = 1;
         }
         this._result = this._arg1 * this._arg2;
